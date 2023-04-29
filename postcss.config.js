@@ -5,8 +5,8 @@ module.exports = {
     require('autoprefixer')(),
     // https://github.com/evrone/postcss-px-to-viewport
     require('postcss-px-to-viewport')({
-      viewportWidth: 375, // 视口宽度（数字)
-      viewportHeight: 1334, // 视口高度（数字）
+      viewportWidth: 1200, // 视口宽度（数字)
+      viewportHeight: 400, // 视口高度（数字）
       unitPrecision: 3, // 设置的保留小数位数（数字）
       viewportUnit: 'vw', // 设置要转换的单位（字符串）
       fontViewportUnit: 'vw', // 设置字体转换的单位（字符串）

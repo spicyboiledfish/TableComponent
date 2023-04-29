@@ -75,7 +75,7 @@ const Home = () => {
     amount2: 200,
     amount3: 208,
     currency: '港元',
-    ca: '吴丹'
+    ca: '吴丹',
   }];
     
   const columns: ColumnType[] = [{
@@ -109,14 +109,15 @@ const Home = () => {
   }, {
     dataKey: 'ca',
     title: 'CA',
-    width: 80
+    width: 80,
+    fixed: true
   }];
     
   return (
     <div style={{padding: 15}}>
       <Table
-        width={window.innerWidth - 30}
-        height={196}
+        width={500}
+        height={300}
         columns={columns}
         dataSource={records}
       />
