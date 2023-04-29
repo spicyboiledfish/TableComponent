@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { AlignType, TableProps, ColumnType } from './interface';
 
 import './index.less';
@@ -147,7 +147,8 @@ function renderCells(columns: ColumnType[], leftFixedColumns: number[], rightFix
   return columns.map((column: ColumnType, index: number) => {
     const align: AlignType | undefined = column.align || undefined;
     const fixed: string = leftFixedColumns.includes(index) ? 'left' : (rightFixedColumns.includes(index) ? 'right' : '');
-    const className: string = classNames('st-table-cell', column.className, fixed ? ('st-table-cell-fix-' + fixed) : '');
+    const previous: number = rightFixedColumns.includes(index) ? index - 1 : 0;
+    const className: string = classNames('st-table-cell', column.className, fixed ? ('st-table-cell-fix-' + fixed) : '', previous ? 'right-fixed' : '');
     const rawValue = (column.dataKey && column.dataKey in record) ? record[column.dataKey] : undefined;
     let value = undefined;
     if (column.render) {

@@ -4,119 +4,125 @@ import { ColumnType, TableProps } from '@/components/table/interface';
 
 interface recordsParams {
   id?: number;
-  productName: string;
-  amount1: number | object;
-  amount2: number | object;
-  amount3: number | object;
-  currency?: string;
-  ca?: string;
+  name: string;
+  age: number;
+  score: number;
+  email: string;
+  phone: string;
+  gender: string;
 }
 const Home = () => {
   const records: recordsParams[] = [{
     id: 1,
-    productName: '淡泰',
-    amount1: 198,
-    amount2: 200,
-    amount3: 205.5,
-    currency: '人民币',
-    ca: 'Amy'
+    name: 'Lea Skei',
+    age: 32,
+    score: 98,
+    email: 'lea.skei@example.com',
+    gender: 'male',
+    phone: '18889898989'
   }, {
-    productName: '方润',
-    amount1: 105.5,
-    amount2: 100,
-    amount3: 108,
-    currency: '港元',
-    ca: 'Baby'
+    id: 2,
+    name: 'Freya Reitz',
+    age: 30,
+    score: 97,
+    email: 'freya.reitz@example.com',
+    gender: 'male',
+    phone: '18889898980'
   }, {
-    productName: '医疗基金-1',
-    amount1: 153,
-    amount2: 150,
-    amount3: 155,
-    currency: '人民币',
-    ca: 'Emily'
+    id: 3,
+    name: 'Ezra Taylor',
+    age: 32,
+    score: 99,
+    email: 'ezra.taylor@example.com',
+    gender: 'female',
+    phone: '18889898981'
   }, {
-    productName: '医疗基金-2',
-    amount1: 302,
-    amount2: 300,
-    amount3: 290,
-    currency: '美元',
-    ca: 'Baby'
+    id: 4,
+    name: 'Sheila Larson',
+    age: 33,
+    score: 90,
+    email: 'sheila.larson@example.com',
+    gender: 'female',
+    phone: '18889898982'
   }, {
-    productName: '医疗基金-3',
-    amount1: 108.8,
-    amount2: 100,
-    amount3: 130,
-    currency: '人民币',
-    ca: 'Amy'
+    id: 5,
+    name: 'Annie Sveen',
+    age: 32,
+    score: 98,
+    email: 'annie.sveen@example.com',
+    gender: 'female',
+    phone: '18889898983'
   }, {
-    productName: '医疗基金-4',
-    amount1: 205,
-    amount2: 200,
-    amount3: 208,
-    currency: '美元',
-    ca: '吴丹'
+    id: 6,
+    name: 'Paraskoviya Zhigalko	',
+    age: 36,
+    score: 98,
+    email: 'paraskoviya.zhigalko@example.com',
+    gender: 'female',
+    phone: '18889898984'
   }, {
-    productName: '医疗基金-5',
-    amount1: 315.5,
-    amount2: 300,
-    amount3: 280,
-    currency: '人民币',
-    ca: 'Baby'
+    id: 7,
+    name: 'Eli Hughes',
+    age: 37,
+    score: 99,
+    email: 'eli.hughes@example.com',
+    gender: 'male',
+    phone: '18889898985'
   }, {
-    productName: '医疗基金-6',
-    amount1: 109,
-    amount2: 95,
-    amount3: 106,
-    currency: '人民币',
-    ca: 'Emily'
+    id: 8,
+    name: 'Patricia Ortega',
+    age: 31,
+    score: 90,
+    email: 'patricia.ortega@example.com',
+    gender: 'female',
+    phone: '18889898989'
   }, {
-    productName: '恒大私募债',
-    amount1: 213,
-    amount2: 200,
-    amount3: 208,
-    currency: '港元',
-    ca: '吴丹',
+    id: 9,
+    name: 'Colin Brække',
+    age: 32,
+    score: 98,
+    email: 'colin.braekke@example.com',
+    gender: 'male',
+    phone: '18889898989'
   }];
     
   const columns: ColumnType[] = [{
-    dataKey: 'productName',
-    title: '产品名称',
-    width: 90,
+    dataKey: 'name',
+    title: 'Name',
+    width: 120,
     fixed: true
   }, {
-    dataKey: 'amount1',
-    title: <React.Fragment>上周缴款金额<br/>（万）</React.Fragment>,
-    width: 140,
+    dataKey: 'age',
+    title: 'Age',
+    width: 120,
     align: 'center',
-    className: 'amount',
     render: (item) => <div>{item}</div>
   }, {
-    dataKey: 'amount2',
-    title: <React.Fragment>上周预约金额<br/>（万）</React.Fragment>,
+    dataKey: 'score',
+    title: 'Score',
     width: 140,
     align: 'center',
     className: 'amount',
   }, {
-    dataKey: 'amount3',
-    title: <React.Fragment>待本周跟进金额<br/>（万）</React.Fragment>,
-    width: 140,
+    dataKey: 'phone',
+    title: 'Phone',
+    width: 150,
     align: 'center',
-    className: 'amount',
   }, {
-    dataKey: 'currency',
-    title: '币种',
-    width: 80
+    dataKey: 'gender',
+    title: 'Gender',
+    width: 140
   }, {
-    dataKey: 'ca',
-    title: 'CA',
-    width: 80,
+    dataKey: 'email',
+    title: 'Email',
+    width: 280,
     fixed: true
   }];
     
   return (
     <div style={{padding: 15}}>
       <Table
-        width={500}
+        width={800}
         height={300}
         columns={columns}
         dataSource={records}
