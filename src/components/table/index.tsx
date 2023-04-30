@@ -3,12 +3,13 @@ import { AlignType, TableProps, ColumnType } from './interface';
 import Pagination from '../pagination';
 import AscendIcon from '@/assets/top.svg'; // 升序
 import DescendIcon from '@/assets/bottom.svg'; // 降序
+import _ from 'lodash';
 import './index.less';
 
 const ScrollableTable = (props: TableProps) => {
   const style: React.CSSProperties = props.style || {};
   const maxHeight: string = props.width ? (props.height + 'px') : 'unset';
-  const columns: ColumnType[] = props.columns || [];
+  const [columns, setColumns] = useState<ColumnType[]>(props.columns || []);
   const dataSource = props.dataSource || [];
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -44,6 +45,7 @@ const ScrollableTable = (props: TableProps) => {
     handleData(page, pageSize);
   }, [page, pageSize]);
 
+
   const handleData = (page: number, pageSize: number) => {
     const maxPage = Math.ceil((total) / pageSize!);
     const tableList = [];
@@ -64,10 +66,35 @@ const ScrollableTable = (props: TableProps) => {
     setPageSize(size);
   };
 
-  const sortRender = (type: string) => {
+  const sortFn = (type: string, column: ColumnType, index: number) => {
+    const tableListData = _.cloneDeep(tableList);
+    const columnsData = _.cloneDeep(columns);
+    const current = tableListData[page - 1];
+    const key = column.dataKey;
+    if (!current || current?.length === 0) return;
+    if (!key) return;
+    const now = current.sort((a, b) => {
+      if (type === 'ascend') {
+        columnsData[index].sort = 'dscend';
+        return a[key] - b[key];
+      } else {
+        columnsData[index].sort = 'ascend';
+        return b[key] - a[key];
+      }
+    });
+    for (const key in tableListData) {
+      if (+key === page - 1) {
+        tableListData[page - 1] = now;
+      }
+    }
+    setColumns(columnsData);
+    setTableList(tableListData);
+  };
+
+  const sortRender = (type: string, column: ColumnType, index: number) => {
     if (!type) return;
     return (
-      <div className='sort-container'>
+      <div className='sort-container' onClick={() => sortFn(type, column, index)}>
         <img src={AscendIcon} />
         <img src={DescendIcon} />
       </div>
@@ -103,7 +130,7 @@ const ScrollableTable = (props: TableProps) => {
                         style={{textAlign: align}}
                       >
                         {title}
-                        {sortRender(sort)}
+                        {sortRender(sort, column, index)}
                       </th>
                     );
                   })
@@ -140,7 +167,6 @@ const ScrollableTable = (props: TableProps) => {
         
       </div>
       <Pagination pageSize={pageSize} total={total} page={page} onChange={paginationChange}/>
-      { sortRender('') }
     </div>
   );
 };
