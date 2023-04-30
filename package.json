@@ -1,6 +1,6 @@
 {
   "name": "tablecomponent",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Table组件",
   "main": "src/index.js",
   "homepage": "https://spicyboiledfish.github.io/TableComponent",
@@ -11,7 +11,7 @@
     "prebuild": "yarn && rimraf -rf build",
     "prepare": "husky install",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -b main -d build",
     "postbuild": "rimraf ./build/**/*.{js,css}.map && rimraf ./build/*.{js,css}.map",
     "build": "webpack -c webpack.config.js",
     "lint": "eslint src --ext .js,.ts,.jsx,.tsx",
