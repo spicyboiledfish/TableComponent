@@ -1,8 +1,9 @@
 {
   "name": "tablecomponent",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Table组件",
   "main": "src/index.js",
+  "homepage": "https://spicyboiledfish.github.io/TableComponent",
   "scripts": {
     "test": "mocha --require ts-node/register test/**/*.spec.ts",
     "start": "npm run dev",
