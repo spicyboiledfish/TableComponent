@@ -84,6 +84,62 @@ const Home = () => {
     email: 'colin.braekke@example.com',
     gender: 'male',
     phone: '18889898989'
+  }, {
+    id: 10,
+    name: 'Eli Hughes',
+    age: 37,
+    score: 99,
+    email: 'eli.hughes@example.com',
+    gender: 'male',
+    phone: '18889898985'
+  }, {
+    id: 11,
+    name: 'Patricia Ortega',
+    age: 31,
+    score: 90,
+    email: 'patricia.ortega@example.com',
+    gender: 'female',
+    phone: '18889898989'
+  }, {
+    id: 12,
+    name: 'Colin Brække',
+    age: 32,
+    score: 98,
+    email: 'colin.braekke@example.com',
+    gender: 'male',
+    phone: '18889898989'
+  }, {
+    id: 13,
+    name: 'Colin Brække',
+    age: 32,
+    score: 98,
+    email: 'colin.braekke@example.com',
+    gender: 'male',
+    phone: '18889898989'
+  }, {
+    id: 14,
+    name: 'Patricia Ortega',
+    age: 31,
+    score: 90,
+    email: 'patricia.ortega@example.com',
+    gender: 'female',
+    phone: '18889898989'
+  }, {
+    id: 15,
+    name: 'Colin Brække',
+    age: 32,
+    score: 98,
+    email: 'colin.braekke@example.com',
+    gender: 'male',
+    phone: '18889898989'
+  }, {
+    id: 16,
+    name: 'Colin Brække',
+    age: 32,
+    score: 98,
+    email: 'colin.braekke@example.com',
+    gender: 'male',
+    phone: '18889898989'
   }];
     
   const columns: ColumnType[] = [{
@@ -123,7 +179,7 @@ const Home = () => {
     <div style={{padding: 15}}>
       <Table
         width={800}
-        height={300}
+        height={400}
         columns={columns}
         dataSource={records}
       />

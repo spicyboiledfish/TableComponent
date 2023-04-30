@@ -1,5 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { AlignType, TableProps, ColumnType } from './interface';
+import Pagination from '../pagination';
 
 import './index.less';
 
@@ -8,6 +9,10 @@ const ScrollableTable = (props: TableProps) => {
   const maxHeight: string = props.width ? (props.height + 'px') : 'unset';
   const columns: ColumnType[] = props.columns || [];
   const dataSource = props.dataSource || [];
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [tableList, setTableList] = useState([] as any[][]);
+  const total = dataSource.length;
 
   let maxWidth = 0;
   if (props.width) style.width = props.width;
@@ -34,66 +39,95 @@ const ScrollableTable = (props: TableProps) => {
     }
   };
 
+  useEffect(() => {
+    handleData(page, pageSize);
+  }, [page, pageSize]);
+
+  const handleData = (page: number, pageSize: number) => {
+    const maxPage = Math.ceil((total) / pageSize!);
+    const tableList = [];
+    for (let i=0; i< maxPage; i++) {
+      const arr = [];
+      for (let j = 0; j< pageSize; j++) {
+        const current = i * pageSize + j;
+        current <= dataSource.length - 1 && arr.push(dataSource[current]);
+      }
+      tableList.push(arr);
+    }
+    setTableList(tableList);
+  };
+
+  const paginationChange = (current: number, size: number) => {
+    const maxPage = Math.ceil((total) / pageSize!);
+    setPage(current > maxPage ? maxPage : current <= 0 ? 1 : current);
+    setPageSize(size);
+  };
+
+
   return (
-    <div
-      className={classNames('st-table-container', props.className)}
-      style={style}
-    >
-      <div className="st-table-header">
-        <table>
-          <colgroup>
-            {
-              renderCols(columns)
-            }
-          </colgroup>
-          <thead className="st-table-thead">
-            <tr>
-              {
-                columns.map((column: ColumnType, index: number) => {
-                  const align: AlignType | undefined = column.align || undefined;
-                  const title: React.ReactNode = column.title || '';
-                  const fixed: string = leftFixedColumns.includes(index) ? 'left' : (rightFixedColumns.includes(index) ? 'right' : '');
-                  const fixedClassName: string = fixed ? ('st-table-cell-fix-' + fixed) : '';
-                  return (
-                    <th
-                      key={index}
-                      className={classNames('st-table-cell', fixedClassName, column.className)}
-                      style={{textAlign: align}}
-                    >
-                      {title}
-                    </th>
-                  );
-                })
-              }
-            </tr>
-          </thead>
-        </table>
-      </div>
+    <div>
       <div
-        ref={tableBody}
-        className="st-table-body"
-        style={{maxHeight: maxHeight}}
-        onScroll={(e) => handleScroll(e.currentTarget)}
+        className={classNames('st-table-container', props.className)}
+        style={style}
       >
-        <table style={{width: maxWidth, minWidth: '100%'}}>
-          <colgroup>
-            {
-              renderCols(columns)
-            }
-          </colgroup>
-          <tbody className="st-table-tbody">
-            {
-              dataSource.map((record, index) => (
-                <tr key={index} className="st-table-row">
-                  {
-                    renderCells(columns, leftFixedColumns, rightFixedColumns, record, index)
-                  }
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <div className="st-table-header">
+          <table>
+            <colgroup>
+              {
+                renderCols(columns)
+              }
+            </colgroup>
+            <thead className="st-table-thead">
+              <tr>
+                {
+                  columns.map((column: ColumnType, index: number) => {
+                    const align: AlignType | undefined = column.align || undefined;
+                    const title: React.ReactNode = column.title || '';
+                    const fixed: string = leftFixedColumns.includes(index) ? 'left' : (rightFixedColumns.includes(index) ? 'right' : '');
+                    const fixedClassName: string = fixed ? ('st-table-cell-fix-' + fixed) : '';
+                    return (
+                      <th
+                        key={index}
+                        className={classNames('st-table-cell', fixedClassName, column.className)}
+                        style={{textAlign: align}}
+                      >
+                        {title}
+                      </th>
+                    );
+                  })
+                }
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div
+          ref={tableBody}
+          className="st-table-body"
+          style={{maxHeight: maxHeight}}
+          onScroll={(e) => handleScroll(e.currentTarget)}
+        >
+          <table style={{width: maxWidth, minWidth: '100%'}}>
+            <colgroup>
+              {
+                renderCols(columns)
+              }
+            </colgroup>
+            <tbody className="st-table-tbody">
+              {
+                tableList && tableList[page - 1] && tableList[page - 1].map((record, index) => (
+                  <tr key={index} className="st-table-row">
+                    {
+                      renderCells(columns, leftFixedColumns, rightFixedColumns, record, index)
+                    }
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+        
       </div>
+      <Pagination pageSize={pageSize} total={total} page={page} onChange={paginationChange}/>
     </div>
   );
 };
