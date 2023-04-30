@@ -42,6 +42,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      BRAHCN: gh-pages
+      BRAHCN: main
       FOLDER: dist
-      BUILD_SCRIPT: npm install && npm run build
+      BUILD_SCRIPT: yarn && yarn build
