@@ -76,10 +76,22 @@ const ScrollableTable = (props: TableProps) => {
     const now = current.sort((a, b) => {
       if (type === 'ascend') {
         columnsData[index].sort = 'dscend';
-        return a[key] - b[key];
+        if (typeof a[key] === 'number') {
+          return a[key] - b[key];
+        } else {
+          const strA = a[key].toUpperCase();
+          const strB = b[key].toUpperCase();
+          return strA > strB ? 1 : strA < strB ? -1 : 0;
+        }
       } else {
         columnsData[index].sort = 'ascend';
-        return b[key] - a[key];
+        if (typeof a[key] === 'number') {
+          return b[key] - a[key];
+        } else {
+          const strA = a[key].toUpperCase();
+          const strB = b[key].toUpperCase();
+          return strA > strB ? -1 : strA < strB ? 1 : 0;
+        }
       }
     });
     for (const key in tableListData) {

@@ -146,7 +146,8 @@ const Home = () => {
     dataKey: 'name',
     title: 'Name',
     width: 120,
-    fixed: true
+    fixed: true,
+    sort: 'dscend',
   }, {
     dataKey: 'age',
     title: 'Age',
