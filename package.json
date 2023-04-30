@@ -1,6 +1,6 @@
 {
   "name": "tablecomponent",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Table组件",
   "main": "src/index.js",
   "homepage": "https://spicyboiledfish.github.io/TableComponent",
@@ -8,11 +8,11 @@
     "test": "mocha --require ts-node/register test/**/*.spec.ts",
     "start": "npm run dev",
     "dev": "NODE_ENV=development webpack serve --hot -c webpack.config.js",
-    "prebuild": "yarn && rimraf -rf build",
+    "prebuild": "yarn && rimraf -rf dist",
     "prepare": "husky install",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b main -d build",
-    "postbuild": "rimraf ./build/**/*.{js,css}.map && rimraf ./build/*.{js,css}.map",
+    "deploy": "gh-pages -b main -d dist",
+    "postbuild": "rimraf ./dist/**/*.{js,css}.map && rimraf ./dist/*.{js,css}.map",
     "build": "webpack -c webpack.config.js",
     "lint": "eslint src --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint src --ext .js,.ts,.jsx,.tsx --fix"
