@@ -7,6 +7,7 @@ export interface ColumnType {
   fixed?: boolean;
   title?: React.ReactNode;
   width?: number;
+  sort?: 'ascend' | 'dscend';
   render?: <T>(value: T, record: T, index: number) => React.ReactNode;
 }
 

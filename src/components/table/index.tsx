@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { AlignType, TableProps, ColumnType } from './interface';
 import Pagination from '../pagination';
-
+import AscendIcon from '@/assets/top.svg'; // 升序
+import DescendIcon from '@/assets/bottom.svg'; // 降序
 import './index.less';
 
 const ScrollableTable = (props: TableProps) => {
@@ -63,6 +64,15 @@ const ScrollableTable = (props: TableProps) => {
     setPageSize(size);
   };
 
+  const sortRender = (type: string) => {
+    if (!type) return;
+    return (
+      <div className='sort-container'>
+        <img src={AscendIcon} />
+        <img src={DescendIcon} />
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -85,6 +95,7 @@ const ScrollableTable = (props: TableProps) => {
                     const title: React.ReactNode = column.title || '';
                     const fixed: string = leftFixedColumns.includes(index) ? 'left' : (rightFixedColumns.includes(index) ? 'right' : '');
                     const fixedClassName: string = fixed ? ('st-table-cell-fix-' + fixed) : '';
+                    const sort: string = column.sort || '';
                     return (
                       <th
                         key={index}
@@ -92,6 +103,7 @@ const ScrollableTable = (props: TableProps) => {
                         style={{textAlign: align}}
                       >
                         {title}
+                        {sortRender(sort)}
                       </th>
                     );
                   })
@@ -128,6 +140,7 @@ const ScrollableTable = (props: TableProps) => {
         
       </div>
       <Pagination pageSize={pageSize} total={total} page={page} onChange={paginationChange}/>
+      { sortRender('') }
     </div>
   );
 };

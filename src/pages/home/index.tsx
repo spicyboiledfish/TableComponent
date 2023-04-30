@@ -152,6 +152,7 @@ const Home = () => {
     title: 'Age',
     width: 120,
     align: 'center',
+    sort: 'ascend',
     render: (item) => <div>{item}</div>
   }, {
     dataKey: 'score',

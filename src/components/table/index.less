@@ -26,6 +26,7 @@
               padding: 8px;
               text-align: left;
               font-size: 12px;
+              position: sticky;
   
               &:last-child {
                 border-right: 0;
@@ -48,6 +49,7 @@
   
         tbody.st-table-tbody {
           tr.st-table-row {
+            
             td.st-table-cell  {
               border-bottom: 1px solid #f0f0f0;
               border-right: 1px solid #f0f0f0;
@@ -99,4 +101,18 @@
     }
 
     
+    
+  }
+
+  .sort-container {
+    width: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 10px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
