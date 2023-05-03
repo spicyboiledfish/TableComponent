@@ -1,6 +1,6 @@
 {
   "name": "tablecomponent",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Table组件",
   "main": "src/index.js",
   "homepage": "https://spicyboiledfish.github.io/TableComponent",
