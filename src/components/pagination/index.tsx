@@ -20,10 +20,11 @@ const Pagination = (props: PaginationProps) => {
           e.stopPropagation();
           onChange(Number(e.target.value), pageSize);
         }}
-        style={{ width: '100px' }}
+        style={{ width: '50px', height: '20px' }}
       />
       <select
         value={pageSize}
+        style={{}}
         onChange={e => {
           e.stopPropagation();
           onChange(page, Number(e.target.value));
